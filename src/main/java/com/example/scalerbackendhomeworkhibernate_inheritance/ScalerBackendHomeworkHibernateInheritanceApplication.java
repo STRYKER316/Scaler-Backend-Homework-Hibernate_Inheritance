@@ -1,9 +1,14 @@
 package com.example.scalerbackendhomeworkhibernate_inheritance;
 
-import com.example.scalerbackendhomeworkhibernate_inheritance.singletable.MentorRepository;
-import com.example.scalerbackendhomeworkhibernate_inheritance.singletable.UserRepository;
-import com.example.scalerbackendhomeworkhibernate_inheritance.singletable.Mentor;
-import com.example.scalerbackendhomeworkhibernate_inheritance.singletable.User;
+//import com.example.scalerbackendhomeworkhibernate_inheritance.singletable.MentorRepository;
+//import com.example.scalerbackendhomeworkhibernate_inheritance.singletable.UserRepository;
+//import com.example.scalerbackendhomeworkhibernate_inheritance.singletable.Mentor;
+//import com.example.scalerbackendhomeworkhibernate_inheritance.singletable.User;
+import com.example.scalerbackendhomeworkhibernate_inheritance.tableperclass.Mentor;
+import com.example.scalerbackendhomeworkhibernate_inheritance.tableperclass.MentorRepository;
+import com.example.scalerbackendhomeworkhibernate_inheritance.tableperclass.User;
+import com.example.scalerbackendhomeworkhibernate_inheritance.tableperclass.UserRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,10 +25,10 @@ public class ScalerBackendHomeworkHibernateInheritanceApplication implements Com
     private MentorRepository mentorRepository;
     private UserRepository userRepository;
 
-    public ScalerBackendHomeworkHibernateInheritanceApplication (MentorRepository mentorRepositorySingleTable,
-                                                                 UserRepository userRepositorySingleTable) {
-        this.mentorRepository = mentorRepositorySingleTable;
-        this.userRepository = userRepositorySingleTable;
+    public ScalerBackendHomeworkHibernateInheritanceApplication(@Qualifier("mentorRepo_tpc") MentorRepository mentorRepository,
+                                                                 @Qualifier("userRepo_tpc") UserRepository userRepository) {
+        this.mentorRepository = mentorRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -40,6 +45,5 @@ public class ScalerBackendHomeworkHibernateInheritanceApplication implements Com
         user.setName("User1");
         user.setEmail("User1@Yahoo.com");
         userRepository.save(user);
-
     }
 }
